@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">ChuckNorrisFact</string>
+    <string name="welcomeText">Welcome to ChuckNorris Fact!</string>
+    <string name="keywordNotice">Invalid Input! Minimum 3 Characters required~ ❤</string>
+    <string name="studentId">z5098173</string>
+    <string name="studentName">Yiming Ma</string>
+    <string name="studentEmail">yiming.ma@student.unsw.edu.au</string>
+    <string name="courseId">INFS 3634</string>
+    <string name="unsw">University of New South Wales</string>
+    <string name="semester">Trimester 1 Year 2020</string>
+    <string name="information_1">This is an application which made for University of New South Wales, INFS 3634 Trimester 1 Year 2020, Individual Assignment 3.</string>
+    <string name="information_2">This application use some function and API from CHUCKNORRIS.IO . Creator did not own any content in this application, please refer to the website below for more copyright © and privacy information.</string>
+    <string name="chucknorris_website">https://api.chucknorris.io/</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
