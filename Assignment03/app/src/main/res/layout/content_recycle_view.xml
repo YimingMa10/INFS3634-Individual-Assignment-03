@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/fredoka_one"
-            android:text="ChuckNorris.io"
+            android:text="ChuckNorris.io "
             android:textColor="#03A9F4"
             android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="@+id/textView6"
