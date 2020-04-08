@@ -1,5 +1,6 @@
 package com.example.assignment03.Fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -57,7 +58,9 @@ public class MainFragment extends Fragment {
         // Setup Spinner Category list
         if(StaticResource.categorySelection.size() < 1){
             StaticResource.categorySelection.add("Random");
-            StaticResource.getCategory(getContext());
+            StaticResource.getCategory(StaticResource.service, getContext());
+            category.setEnabled(false);
+            btnSubmit.setEnabled(false);
 
             // Notice for category loading delay
             notice.setVisibility(View.VISIBLE);
@@ -66,10 +69,12 @@ public class MainFragment extends Fragment {
                 @Override
                 public void run() {
                     notice.setVisibility(View.GONE);
+                    category.setEnabled(true);
+                    btnSubmit.setEnabled(true);
                 }
-            }, 3000);
+            }, 1500);
         }
-        setupSpinnerAdapter(getContext());
+        setupSpinnerAdapter(getContext(), getActivity());
 
         // Setup radio group function to choose between option: Category / Keyword
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -99,9 +104,8 @@ public class MainFragment extends Fragment {
 
                 // If category chosen
                 if(selectedId == R.id.optionCategory){
-                    // Get and update current category
+                    // Get current category
                     String categorySelected = category.getSelectedItem().toString();
-                    StaticResource.currentCategory = categorySelected;
 
                     // If category selected equal to empty, set input valid check to false
                     if(categorySelected.equals("")){
@@ -119,7 +123,7 @@ public class MainFragment extends Fragment {
                     }
 
                     // Send request to get fact by category
-                    StaticResource.sendRequest(categorySelected, getContext(), getFragmentManager(), selectedId);
+                    StaticResource.sendRequest(StaticResource.service, categorySelected, getContext(), getFragmentManager(), selectedId);
 
                 // If keyword chosen
                 } else if(selectedId == R.id.optionKeyword){
@@ -146,11 +150,8 @@ public class MainFragment extends Fragment {
 
                     // If input keyword valid
                     } else {
-                        // Update current keyword
-                        StaticResource.currentKeyword = keyword;
-
                         // Send request to get facts by keyword
-                        StaticResource.sendRequest(keyword, getContext(), getFragmentManager(), selectedId);
+                        StaticResource.sendRequest(StaticResource.service, keyword, getContext(), getFragmentManager(), selectedId);
                     }
                 }
 
@@ -224,8 +225,10 @@ public class MainFragment extends Fragment {
     }
 
     // Setup spinner adapter method
-    public static void setupSpinnerAdapter(Context context){
-        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, StaticResource.categorySelection);
-        category.setAdapter(categoryAdapter);
+    public static void setupSpinnerAdapter(Context context, Activity activity){
+        if(activity != null) {
+            ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, StaticResource.categorySelection);
+            category.setAdapter(categoryAdapter);
+        }
     }
 }

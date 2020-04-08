@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.assignment03.Model.Result;
@@ -30,8 +31,12 @@ public class FactDetailFragment extends Fragment {
     private TextView updateTime;
     private TextView notice;
 
-    public FactDetailFragment() {
-        // Required empty public constructor
+    private Result result;
+    private String categoryInput;
+
+    public FactDetailFragment(Result result, String categoryInput) {
+        this.result = result;
+        this.categoryInput = categoryInput;
     }
 
     @Override
@@ -39,9 +44,6 @@ public class FactDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_fact_detail, container, false);
-
-        // Get the current instance found
-        final Result result = StaticResource.currentCategoryFact;
 
         // Get the components by id
         icon = view.findViewById(R.id.icon);
@@ -62,14 +64,14 @@ public class FactDetailFragment extends Fragment {
         value.setText(result.getValue());
 
         // Setup current category choose
-        currentCategorty.setText("Chosen Category: " + StaticResource.currentCategory);
+        currentCategorty.setText("Chosen Category: " + categoryInput);
 
         // Setup last updated time
         int index = result.getUpdatedAt().indexOf(".");
         updateTime.setText(result.getUpdatedAt().substring(0, index));
 
         // Click text to back to main fragment to reset category
-        resetCategorty.setText("Click Here to Reset Category");
+        resetCategorty.setText("Click Here to Reset Category or search by Keyword");
         resetCategorty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,7 +132,7 @@ public class FactDetailFragment extends Fragment {
                 thread.start();
 
                 // Run the send request method again
-                StaticResource.sendRequest(StaticResource.currentCategory, getContext(), getFragmentManager(), R.id.optionCategory);
+                StaticResource.sendRequest(StaticResource.service, categoryInput, getContext(), getFragmentManager(), R.id.optionCategory);
             }
         });
 

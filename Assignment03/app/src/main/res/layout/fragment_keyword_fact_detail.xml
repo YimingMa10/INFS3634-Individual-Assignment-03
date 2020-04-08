@@ -79,4 +79,14 @@
         app:layout_constraintEnd_toEndOf="@+id/keyword"
         app:layout_constraintStart_toStartOf="@+id/keyword"
         app:layout_constraintTop_toTopOf="@+id/keyword" />
+
+    <TextView
+        android:id="@+id/resetSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="#2196F3"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/rv_list"
+        app:layout_constraintEnd_toEndOf="@+id/rv_list" />
 </androidx.constraintlayout.widget.ConstraintLayout>
